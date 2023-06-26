@@ -1,0 +1,22 @@
+# File: azure-pipelines.yml
+
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: MavenAuthenticate@0
+  inputs:
+    artifactsFeeds: 'YourArtifactFeedName'
+
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean package'
